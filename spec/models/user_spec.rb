@@ -27,7 +27,7 @@ RSpec.describe User, type: :model do
       expect(@user.errors[:name]).to include("can't be blank")
     end
     it "is invalid without an email address" do
-      @user.name = nil
+      @user.email = nil
       @user.valid?
       expect(@user.errors[:email]).to include("can't be blank")
     end
@@ -39,12 +39,14 @@ RSpec.describe User, type: :model do
   end
 
   describe "information cannot already be in use" do
-    
+    before (:each) do
+      @user1 = create(:user, email: 'duplicate@example.com')
+    end
+
     it "is invalid with a duplicate email address" do
-      User.create(name: 'test', email: 'test@example.com', password: 'password')
-      user = User.new(name: 'test', email: 'test@example.com', password: 'password')
-      user.valid?
-      expect(user.errors[:email]).to include("has already been taken")
+      user2 = build(:user, email: 'duplicate@example.com')
+      user2.valid?
+      expect(user2.errors[:email]).to include("has already been taken")
     end
   end
 
