@@ -55,7 +55,6 @@ RSpec.describe User, type: :model do
 
     it "has many foods through destinations" do
       food = Food.create
-
       user.foods << food
       user.save
 
@@ -64,7 +63,6 @@ RSpec.describe User, type: :model do
 
     it "has many destinations" do
       destination = Destination.create
-
       user.destinations << destination
       user.save
 
@@ -73,7 +71,6 @@ RSpec.describe User, type: :model do
 
     it "has many comments" do
       comment = Comment.create
-
       user.comments << comment
       user.save
 

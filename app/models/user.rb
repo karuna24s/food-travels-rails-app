@@ -7,8 +7,8 @@ class User < ApplicationRecord
   devise :omniauthable, :omniauth_providers => [:facebook]
   validates :email, presence: true, uniqueness: true
   validates :name, presence: true
-  has_many :foods, through: :destinations
   has_many :destinations
+  has_many :foods, through: :destinations
   has_many :comments
 
   def self.from_omniauth(auth)
