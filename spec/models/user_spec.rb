@@ -58,7 +58,7 @@ RSpec.describe User, type: :model do
       user.foods << food
       user.save
 
-      expect(food.users).to eq(user)
+      expect(user.foods).to include(food)
     end
 
     it "has many destinations" do
