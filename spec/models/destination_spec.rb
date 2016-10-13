@@ -34,4 +34,33 @@ RSpec.describe Destination, type: :model do
     end
   end
 
+  describe "associations" do
+    let(:destination) { subject }
+
+    it 'belongs to a food' do
+      food = Food.create
+      destination.food = food
+      destination.save
+
+      expect(food.destinations).to include(destination)
+    end
+
+    it 'belongs to a user' do
+      user = User.create
+      destination.user = user
+      destination.save
+
+      expect(user.destinations).to include(destination)
+    end
+
+    it "has many comments" do
+      comment = Comment.create
+
+      destination.comments << comment
+      destination.save
+
+      expect(comment.destination).to eq(destination)
+    end
+  end
+
 end

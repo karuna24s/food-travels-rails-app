@@ -21,4 +21,27 @@ RSpec.describe Food, type: :model do
       expect(food.errors[:name]).to include("can't be blank")
     end
   end
+
+  describe "associations" do
+    let(:food) { subject }
+
+    it "has many users through destinations" do
+      user = User.create
+
+      food.users << user
+      food.save
+
+      expect(user.foods).to eq(food)
+    end
+
+    it "has many destinations" do
+      destination = Destination.create
+
+      food.destinations << destination
+      food.save
+
+      expect(destination.food).to eq(food)
+    end
+  end
+
 end

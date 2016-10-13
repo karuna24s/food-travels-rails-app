@@ -37,4 +37,35 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe "associations" do
+    let(:user) { subject }
+
+    it "has many foods through destinations" do
+      food = Food.create
+
+      user.foods << food
+      user.save
+
+      expect(food.users).to eq(user)
+    end
+
+    it "has many destinations" do
+      destination = Destination.create
+
+      user.destinations << destination
+      user.save
+
+      expect(destination.user).to eq(user)
+    end
+
+    it "has many comments" do
+      comment = Comment.create
+
+      user.comments << comment
+      user.save
+
+      expect(comment.user).to eq(user)
+    end
+  end
+
 end
