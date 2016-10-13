@@ -17,4 +17,9 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0,20]
     end
   end
+
+  def self.most_destinations
+    User.joins(:destinations).group(:user_id).order("count(user_id) DESC").first.email
+  end
+  
 end
