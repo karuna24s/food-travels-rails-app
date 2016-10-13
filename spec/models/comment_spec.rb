@@ -1,23 +1,25 @@
 require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
-  before :each do
-    @comment = Comment.create(
-      content: 'Excellent Post.',
-      )
+  before (:each) do
+    @comment = create(:comment)
   end
 
-  describe "information is valid" do
-    it "is valid with a content" do
+  describe "misc" do
+    it "has a valid factory" do
+      expect(@comment).to be_valid
+    end
+
+    it "is valid with content" do
       expect(@comment).to be_valid
     end
   end
 
   describe "information cannot be left blank" do
-    it "is invalid without a content" do
-      comment = Comment.new(content: nil)
-      comment.valid?
-      expect(comment.errors[:content]).to include("can't be blank")
+    it "is invalid without content" do
+      @comment.content = nil
+      @comment.valid?
+      expect(@comment.errors[:content]).to include("can't be blank")
     end
   end
 
@@ -25,19 +27,11 @@ RSpec.describe Comment, type: :model do
     let(:comment) { subject }
 
     it 'belongs to a destination' do
-      destination = Destination.create
-      comment.destination = destination
-      comment.save
-
-      expect(destination.comments).to include(comment)
+      expect(@comment.destination).to eq(@destination)
     end
 
     it 'belongs to a user' do
-      user = User.create
-      comment.user = user
-      comment.save
-
-      expect(user.comments).to include(comment)
+      expect(@comment.user).to eq(@user)
     end
   end
 end

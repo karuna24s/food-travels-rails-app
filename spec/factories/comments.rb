@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :comment do
-    content "MyText"
-    integer ""
-    integer ""
+    content { Faker::Lorem.paragraphs }
+    destination_id 1
+    user_id 1
   end
 end
