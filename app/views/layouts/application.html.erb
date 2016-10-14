@@ -9,8 +9,17 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <%= render 'layouts/navigation' %>
+    <%= render 'layouts/messages' %>
+    <!-- <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p> -->
     <%= yield %>
+
+    <hr>
+
+    <footer class="container">
+      <small>&copy; 2016 Developed by <a href="http://www.karunasehgal.com">Karuna Sehgal</a> | <a href="https://github.com/karuna24s/food-travels-rail-app">GitHub <i class="fa fa-github"></i></a></small>
+    </footer>
+
   </body>
 </html>
