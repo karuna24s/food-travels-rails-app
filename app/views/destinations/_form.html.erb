@@ -1,4 +1,4 @@
-<%= form_for(destination) do |f| %>
+<%= form_for(@destination) do |f| %>
 
   <%= f.label :title %>
   <%= f.text_field :title %>
@@ -10,7 +10,7 @@
   <%= f.text_field :content %>
 
   <%= f.label :recommendation %>
-  <%= f.text_field :recomendation %>
+  <%= f.text_field :recommendation %>
 
   <%= f.submit %>
 
