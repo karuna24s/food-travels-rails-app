@@ -1,0 +1,17 @@
+<%= form_for(destination) do |f| %>
+
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+
+  <%= f.label :location %>
+  <%= f.text_field :location %>
+
+  <%= f.label :content %>
+  <%= f.text_field :content %>
+
+  <%= f.label :recommendation %>
+  <%= f.text_field :recomendation %>
+
+  <%= f.submit %>
+
+<% end %>
