@@ -3,6 +3,10 @@ class DestinationsController < ApplicationController
     @destinations = Destination.all
   end
 
+  def show
+    @destination = Destination.find(params[:id])
+  end
+
   def new
     @destination = Destination.new
   end
@@ -12,7 +16,14 @@ class DestinationsController < ApplicationController
     redirect_to destination_path(@destination)
   end
 
-  def show
+  def edit
+    @destination = Destination.find(params[:id])
+  end
+
+  def update
+    @destination = Destination.find(params[:id])
+    @destination.update(destination_params)
+    redirect_to destination_path(@destination)
   end
 
   private
