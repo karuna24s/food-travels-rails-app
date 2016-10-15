@@ -1,0 +1,28 @@
+<h1><%=@destination.title%></h1>
+<p><%=@destination.content%></p>
+<p><%=@destination.location%></p>
+<p><%=@destination.recommendation%></p>
+
+<p>Comments: <br>
+  <% @destination.comments.each do |comment| %>
+    <li><%= comment.user.name %> says: <%= comment.content %></li>
+  <% end %>
+</p>
+<p>Comments by: <br>
+  <% @destination.users.uniq.each do |user| %>
+    <ul>
+      <li><%= link_to user.name, user_path(user) %></li>
+    </ul>
+  <% end %>
+</p>
+<h3>Add a comment</h3>
+<%= form_for @destination.comments.build do |f| %>
+<%= f.hidden_field :destination_id %>
+  <%= f.collection_select :user_id, User.all, :id, :username %> <br>
+  <%= f.fields_for :user, @destination.comments.last.build_user do |user_fields| %>
+    <%= user_fields.text_field :name %>
+  <% end %> <br>
+  <%= f.label :content %>
+  <%= f.text_area :content %>
+  <%= f.submit %>
+<% end %>
