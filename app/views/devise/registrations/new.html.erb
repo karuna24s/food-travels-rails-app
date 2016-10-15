@@ -1,5 +1,5 @@
 <div class="container">
-  <div class=" well col-md-4">
+  <div class=" well col-sm-4">
     <h2>Sign up</h2>
     <p>Fill out the below fields or <br />
       <%- if devise_mapping.omniauthable? %>
@@ -35,7 +35,7 @@
       </div>
 
       <div class="actions">
-        <%= f.submit "Sign up" %>
+        <%= f.submit "Sign up", class: "btn btn-sm btn-primary" %>
       </div>
     <% end %>
 
