@@ -1,3 +1,25 @@
 // Place all the styles related to the Welcome controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.center {
+  height: 600px;
+  background-image: url(asset_path('banana-leaf'));
+  background-size: cover;
+  margin-top: 20px;
+  color: white;
+}
+.title {
+  text-align: center;
+}
+
+.header-h1 {
+  margin: 0;
+  font-size: 4em;
+  white-space: nowrap;
+}
+
+.header-h4 {
+  margin: 0;
+  font-size: 2em;
+}

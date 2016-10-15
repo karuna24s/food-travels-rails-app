@@ -1,2 +1,13 @@
-<h1>Welcome to Food-Travels <%=current_user.email if current_user%>!</h1>
-<%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path %>
+<header class="main-header">
+  <div class="title">
+    <h1 class="header-h1">Food Travels</h1>
+    <h4 class="header-h4">Share your food travel story</h4>
+      <br>
+      <% if current_user %>
+        <%= link_to "Create Your Story", new_user_destination_path(current_user), class: "btn btn-default" %>
+      <% else %>
+        <%= link_to "Sign up to create your food travel story", new_user_registration_path, class: "btn btn-default" %>
+      <% end %>
+  </div>
+</header>
+<div class="center jumbotron"></div>
