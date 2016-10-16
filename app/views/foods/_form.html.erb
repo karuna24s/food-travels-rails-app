@@ -1,25 +1,29 @@
 <div class="container">
   <div class=" well col-sm-6">
-    <h2>Create Your Food Travel Story</h2>
+    <h2>Create Your Food Travel Story</h2><br>
     <%= form_for(@food) do |f| %>
-      Food Name: <%= f.text_field :name %><br>
-      Type of Food:<%= f.text_field :category %><br>
-
+      <p><strong>Food Name</strong> <%= f.text_field :name, class: 'form-control' %><br></p>
+      <p><strong>Type of Food</strong> <%= f.text_field :category, class: 'form-control' %><br></p>
       <%= f.fields_for @food.destinations.build do |ff| %>
-        <%= ff.label :title %>
-        <%= ff.text_field :title %>
+        <p>
+          <%= ff.label :title %>
+          <%= ff.text_field :title, class: 'form-control' %><br>
+        </p>
 
-        <%= ff.label :location %>
-        <%= ff.text_field :location %>
+        <p>
+          <%= ff.label :location %>
+          <%= ff.text_field :location, class: 'form-control' %><br>
+        </p>
 
-        <%= ff.label :content %>
-        <%= ff.text_field :content %>
+        <p>
+          <%= ff.label :content %>
+          <%= ff.text_area :content, rows: 10, class: 'form-control' %><br>
+        </p>
 
-        <%= ff.label :recommendation %>
-        <%= ff.text_field :recommendation %>
+        <p><strong>Recommendations</strong><%= ff.text_field :recommendation, class: 'form-control' %><br></p>
       <% end %>
 
-      <%= f.submit %>
+      <%= f.submit "Create Story", class: "btn btn-md btn-primary" %>
     <% end %>
   </div>
 </div>
