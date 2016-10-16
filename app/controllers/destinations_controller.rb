@@ -8,6 +8,7 @@ class DestinationsController < ApplicationController
   end
 
   def new
+    raise params.inspect
     @destination = Destination.new
   end
 

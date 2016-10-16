@@ -1,9 +1,6 @@
 <div class="container">
   <div class="col-md-8 well">
-    <h2>Welcome, <%= @user.name %>!
+    <h2>Welcome, <%= @user.name %>!</h2>
     <h4>Email: <%= @user.email %></h4>
-    <% else %>
-      <%= link_to " Connect with Facebook", '/auth/facebook', class: "btn btn-xs btn-primary btn-fb" %>
-    <% end %>
   </div>
 </div>
