@@ -8,11 +8,12 @@ class DestinationsController < ApplicationController
   end
 
   def new
-    raise params.inspect
     @destination = Destination.new
   end
 
   def create
+
+    # raise params.inspect
     @destination = Destination.create(destination_params)
     redirect_to destination_path(@destination)
   end

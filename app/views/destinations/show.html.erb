@@ -9,7 +9,7 @@
   <% end %>
 </p>
 <p>Comments by: <br>
-  <% @destination.users.uniq.each do |user| %>
+  <% @destination.user.un.each do |user| %>
     <ul>
       <li><%= link_to user.name, user_path(user) %></li>
     </ul>
@@ -18,7 +18,7 @@
 <h3>Add a comment</h3>
 <%= form_for @destination.comments.build do |f| %>
 <%= f.hidden_field :destination_id %>
-  <%= f.collection_select :user_id, User.all, :id, :username %> <br>
+  <%= f.collection_select :user_id, User.all, :id, :name %> <br>
   <%= f.fields_for :user, @destination.comments.last.build_user do |user_fields| %>
     <%= user_fields.text_field :name %>
   <% end %> <br>

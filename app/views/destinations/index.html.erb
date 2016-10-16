@@ -1,6 +1,6 @@
 <% @destinations.each do |destination| %>
-  <p><%= destination.title %></p>
-  <p><%= destination.location %></p>
-  <p><%= destination.content %></p>
-  <p><%= destination.recommendation %></p>
-<% end %>
+    <p><%= link_to destination.food.name, food_path(destination.food), class: "food_name" %>
+    <div id="content-<%= destination.id %>"><%= truncate destination.content %></div><br>
+    <button class="js-more btn btn-small btn-primary" data-id="<%= destination.id %>">More ...</button>
+    </p>
+  <% end %>
