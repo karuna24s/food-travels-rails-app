@@ -1,8 +1,3 @@
-<h1><%=@destination.title%></h1>
-<p><%=@destination.content%></p>
-<p><%=@destination.location%></p>
-<p><%=@destination.recommendation%></p>
-
 <p>Comments: <br>
   <% @destination.comments.each do |comment| %>
     <li><%= comment.user.name %> says: <%= comment.content %></li>

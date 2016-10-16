@@ -9,6 +9,7 @@ class FoodsController < ApplicationController
 
   def new
     @food = Food.new
+    @destination = @food.destinations.build
   end
 
   def create

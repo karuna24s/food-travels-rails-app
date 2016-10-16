@@ -1,7 +1,7 @@
 <h3>Food Travel Story</h3>
 
 <p>Food name: <%=@food.name%></p>
-<p>Food category: <%=@food.category%></p>
+<p>Type of Food: <%=@food.category%></p>
 <ul>
 <% @food.destinations.each do |destination| %>
   <li><%= destination.title %></li>
