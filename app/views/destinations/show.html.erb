@@ -9,7 +9,7 @@
   <% end %>
 </p>
 <p>Comments by: <br>
-  <% @destination.user.un.each do |user| %>
+  <% @destination.users.uniq.each do |user| %>
     <ul>
       <li><%= link_to user.name, user_path(user) %></li>
     </ul>

@@ -1,12 +1,9 @@
 <div class="container">
   <div class=" well col-sm-6">
+    <h2>Create Your Food Travel Story</h2>
     <%= form_for(@food) do |f| %>
-
-      <%= f.label :name %>
-      <%= f.text_field :name %><br>
-
-      <%= f.label :category %>
-      <%= f.text_field :category %><br>
+      Food Name: <%= f.text_field :name %><br>
+      Type of Food:<%= f.text_field :category %><br>
 
       <%= f.fields_for @food.destinations.build do |ff| %>
         <%= ff.label :title %>

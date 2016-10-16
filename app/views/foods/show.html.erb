@@ -1,1 +1,12 @@
-<h1><%=@food.name%></h1>
+<h3>Food Travel Story</h3>
+
+<p>Food name: <%=@food.name%></p>
+<p>Food category: <%=@food.category%></p>
+<ul>
+<% @food.destinations.each do |destination| %>
+  <li><%= destination.title %></li>
+  <li><%= destination.content %></li>
+  <li><%= destination.location %></li>
+  <li><%= destination.recommendation %></li>
+<% end %>
+</ul>
