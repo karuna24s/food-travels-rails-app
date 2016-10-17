@@ -5,6 +5,7 @@ class DestinationsController < ApplicationController
 
   def show
     @destination = Destination.find(params[:id])
+    @food = @destination.food
   end
 
   def new
@@ -13,9 +14,8 @@ class DestinationsController < ApplicationController
   end
 
   def create
-
     # raise params.inspect
-    @destination = Destination.create(destination_params)
+    @destination = current_user.destinations.create(destination_params)
     redirect_to destination_path(@destination)
   end
 
@@ -32,7 +32,7 @@ class DestinationsController < ApplicationController
   private
 
   def destination_params
-    params.require(:destination).permit(:title, :location, :content, :recommendation, :food_id, :user_id, :food_attributes => [:name, :category])
+    params.require(:destination).permit(:title, :location, :content, :recommendation, :food_id, :food_attributes => [:name, :category])
   end
 
 end

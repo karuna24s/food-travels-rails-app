@@ -1,6 +1,10 @@
-<% @destinations.each do |destination| %>
-    <p><%= link_to destination.title, destination_path(destination) %>
-    <div id="content-<%= destination.id %>"><%= destination.content %></div><br>
-    <!-- <button class="js-more btn btn-small btn-primary" data-id="<%= destination.id %>">More ...</button> -->
-    </p>
-  <% end %>
+<div class="container">
+  <div class=" well col-sm-12">
+    <% @destinations.each do |destination| %>
+      <p><%= link_to destination.title, destination_path(destination) %>
+      <div id="content-<%= destination.id %>"><%= destination.content %></div><br>
+      <!-- <button class="js-more btn btn-small btn-primary" data-id="<%= destination.id %>">More ...</button> -->
+      </p>
+    <% end %>
+  </div>
+</div>

@@ -1,16 +1,11 @@
 <div class="container">
-  <div class=" well col-sm-6">
+  <div class=" well col-sm-4">
     <h3>Food Travel Story</h3>
 
     <p>Title: <%=@destination.title%></p>
     <p>Location: <%=@destination.location%></p>
-
-    <ul>
-    <% @destinations.food.each do |food| %>
-      <li><%= food.name %></li>
-      <li><%= food.category %></li>
-    <% end %>
-    </ul>
+    <p>Name: <%=@food.name%></p>
+    <p>Type of Food: <%=@food.category%></p>
 
     <p>Content: <%=@destination.content%></p>
     <p>Recommendations: <%=@destination.recommendation%></p>

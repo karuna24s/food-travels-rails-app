@@ -9,5 +9,5 @@ class Destination < ApplicationRecord
       f.category = food_attributes[:category]
     end
   end
-  
+
 end
