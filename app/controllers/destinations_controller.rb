@@ -9,7 +9,7 @@ class DestinationsController < ApplicationController
 
   def new
     @destination = Destination.new
-    @destinations.build_food #belongs_to adds build assoications
+    @destination.build_food #belongs_to adds build assoications
   end
 
   def create
