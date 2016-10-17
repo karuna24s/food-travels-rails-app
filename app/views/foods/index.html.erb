@@ -1,5 +1,9 @@
-<ul>
-<% @foods.each do |food| %>
-  <li><%= link_to food.name, food %></li>
-<% end %>
-</ul>
+<div class="container">
+  <div class=" well col-sm-6">
+    <ul>
+    <% @foods.each do |food| %>
+      <li><%= link_to food.name, food %></li>
+    <% end %>
+    </ul>
+  </div>
+</div>

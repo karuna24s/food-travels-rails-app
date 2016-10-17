@@ -1,12 +1,16 @@
-<h3>Food Travel Story</h3>
+<div class="container">
+  <div class=" well col-sm-6">
+    <h3>Food Travel Story</h3>
 
-<p>Food name: <%=@food.name%></p>
-<p>Type of Food: <%=@food.category%></p>
-<ul>
-<% @food.destinations.each do |destination| %>
-  <li><%= destination.title %></li>
-  <li><%= destination.content %></li>
-  <li><%= destination.location %></li>
-  <li><%= destination.recommendation %></li>
-<% end %>
-</ul>
+    <p>Food name: <%=@food.name%></p>
+    <p>Type of Food: <%=@food.category%></p>
+    <ul>
+    <% @food.destinations.each do |destination| %>
+      <li><%= destination.title %></li>
+      <li><%= destination.content %></li>
+      <li><%= destination.location %></li>
+      <li><%= destination.recommendation %></li>
+    <% end %>
+    </ul>
+  </div>
+</div>
