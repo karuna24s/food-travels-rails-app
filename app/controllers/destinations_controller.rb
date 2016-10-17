@@ -9,6 +9,7 @@ class DestinationsController < ApplicationController
 
   def new
     @destination = Destination.new
+    @destinations.build_food #belongs_to adds build assoications
   end
 
   def create
@@ -31,7 +32,7 @@ class DestinationsController < ApplicationController
   private
 
   def destination_params
-    params.require(:destination).permit(:title, :location, :content, :recommendation, :food_id, :user_id)
+    params.require(:destination).permit(:title, :location, :content, :recommendation, :food_id, :user_id, :food_attributes => [:name, :category])
   end
 
 end

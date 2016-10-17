@@ -1,0 +1,31 @@
+<div class="container">
+  <div class=" well col-sm-6">
+    <h2>Create Your Food Travel Story</h2><br>
+    <%= form_for(@destination) do |destination_builder| %>
+      <p>
+        <%= destination_builder.label :title %>
+        <%= destination_builder.text_field :title, class: 'form-control' %><br>
+      </p>
+
+      <p>
+        <%= destination_builder.label :location %>
+        <%= destination_builder.text_field :location, class: 'form-control' %><br>
+      </p>
+
+      <%= destination_builder.fields_for :food do |food_builder| %>
+        <p><strong>Food Name</strong> <%= food_builder.text_field :name, class: 'form-control' %><br></p>
+        <p><strong>Type of Food</strong> <%= food_builder.text_field :category, class: 'form-control' %><br></p>
+      <% end %>
+
+      <p>
+        <%= destination_builder.label :content %>
+        <%= destination_builder.text_area :content, rows: 10, class: 'form-control' %><br>
+      </p>
+
+      <p><strong>Recommendations</strong><%= destination.text_field :recommendation, class: 'form-control' %><br></p>
+
+
+      <%= destination_builder.submit "Create Story", class: "btn btn-md btn-primary" %>
+    <% end %>
+  </div>
+</div>

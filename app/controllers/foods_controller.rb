@@ -9,13 +9,16 @@ class FoodsController < ApplicationController
 
   def new
     @food = Food.new
-    @destination = @food.destinations.build
   end
 
   def create
     # raise params.inspect
-    @food = Food.create(food_params)
-    redirect_to food_path(@food)
+    @food = Food.new(food_params)
+    if @food.save
+      redirect_to food_path(@food)
+    else
+      render :new
+    end
   end
 
   def edit
@@ -31,6 +34,7 @@ class FoodsController < ApplicationController
   private
 
   def food_params
-    params.require(:food).permit(:name, :category, destinations_attributes: [:title, :content, :location, :recommendation])
+    params.require(:food).permit(:name, :category)
+    # :destinations_attributes => [:title, :content, :location, :recommendation]
   end
 end

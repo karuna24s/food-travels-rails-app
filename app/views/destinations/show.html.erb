@@ -1,23 +1,18 @@
-<p>Comments: <br>
-  <% @destination.comments.each do |comment| %>
-    <li><%= comment.user.name %> says: <%= comment.content %></li>
-  <% end %>
-</p>
-<p>Comments by: <br>
-  <% @destination.users.uniq.each do |user| %>
+<div class="container">
+  <div class=" well col-sm-6">
+    <h3>Food Travel Story</h3>
+
+    <p>Title: <%=@destination.title%></p>
+    <p>Location: <%=@destination.location%></p>
+
     <ul>
-      <li><%= link_to user.name, user_path(user) %></li>
+    <% @destinations.food.each do |food| %>
+      <li><%= food.name %></li>
+      <li><%= food.category %></li>
+    <% end %>
     </ul>
-  <% end %>
-</p>
-<h3>Add a comment</h3>
-<%= form_for @destination.comments.build do |f| %>
-<%= f.hidden_field :destination_id %>
-  <%= f.collection_select :user_id, User.all, :id, :name %> <br>
-  <%= f.fields_for :user, @destination.comments.last.build_user do |user_fields| %>
-    <%= user_fields.text_field :name %>
-  <% end %> <br>
-  <%= f.label :content %>
-  <%= f.text_area :content %>
-  <%= f.submit %>
-<% end %>
+
+    <p>Content: <%=@destination.content%></p>
+    <p>Recommendations: <%=@destination.recommendation%></p>
+  </div>
+</div>
