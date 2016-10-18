@@ -9,5 +9,24 @@
 
     <p>Content: <%=@destination.content%></p>
     <p>Recommendations: <%=@destination.recommendation%></p>
+
+    <h3>Add a comment</h3>
+      <%= form_for @destination.comments.build do |f| %>
+      <%= f.hidden_field :destination_id %>
+      <%= f.hidden_field :user_id %>
+        <%= f.fields_for :user, @destination.comments.last.build_user do |user_fields| %>
+          <%= user_fields.text_field :name %>
+        <% end %> <br>
+        <p><strong>Content</strong> <%= f.text_area :content, class: 'form-control' %><br></p>
+        <%= f.submit %>
+      <% end %><br>
+
+    <p>Comments: <br>
+      <% @destination.comments.each do |comment| %>
+        <li><%= comment.user.name %> says: <%= comment.content %></li>
+      <% end %>
+    </p>
+
   </div>
+
 </div>

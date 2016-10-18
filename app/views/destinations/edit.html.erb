@@ -2,6 +2,8 @@
   <div class=" well col-sm-6">
     <h2>Edit Your Food Travel Story</h2><br>
     <%= form_for(@destination) do |destination_builder| %>
+      <%= render 'shared/error_messages' %>
+
       <p>
         <%= destination_builder.label :title %>
         <%= destination_builder.text_field :title, class: 'form-control' %><br>
