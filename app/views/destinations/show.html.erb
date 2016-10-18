@@ -10,6 +10,8 @@
     <p>Content: <%=@destination.content%></p>
     <p>Recommendations: <%=@destination.recommendation%></p><br>
 
+    <%= link_to "Update Food Travel Story", edit_destination_path(@destination), class: "btn btn-info btn-sm dest_button" %><br><br>
+
     <h4>Add a comment:</h4>
       <%= form_for @destination.comments.build do |f| %>
       <%= f.hidden_field :destination_id %>
@@ -18,7 +20,7 @@
           <p><strong>Name</strong><%= user_fields.text_field :name, class: 'form-control' %></p>
         <% end %>
         <p><strong>Content</strong> <%= f.text_area :content, class: 'form-control' %></p>
-        <%= f.submit %>
+        <%= f.submit "Create Comment", class: "btn btn-sm btn-primary" %>
       <% end %><br>
 
     <p>Comments: <br>
