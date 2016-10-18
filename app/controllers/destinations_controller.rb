@@ -10,7 +10,7 @@ class DestinationsController < ApplicationController
 
   def new
     @destination = Destination.new
-    @destination.build_food #belongs_to adds build assoications
+    @destination.build_food #belongs_to adds build associations
   end
 
   def create
@@ -24,19 +24,25 @@ class DestinationsController < ApplicationController
   end
 
   def update
-    @destination = Destination.find(params[:id])
-    @destination.update(destination_params)
-    redirect_to destination_path(@destination)
+    if !current_user
+      redirect_to new_user_session_path, alert: "You must be logged in order to edit a travel story"
+    elsif current_user.username == params[:user_id]
+      @destination = Destination.find(params[:id])
+      @destination.update(destination_params)
+      redirect_to destination_path(@destination)
+    else
+      redirect_to new_user_destination_path(current_user), alert: "You can only edit travel stories for yourself"
+    end
+
   end
 
   def destroy
-    @destination = Destination.find_by(id: params[:id])
-    if @destination.destroy
-      flash[:success] = "Food Travel Story is destroyed"
+    if current_user
+      @destination.destroy
+      redirect_to destinations_path
     else
-      flash[:danger] = "Food Travel Story is not destroyed"
+      redirect_to new_user_session_path, alert: "You must be logged in order to delete a travel story"
     end
-    redirect_to root_url
   end
 
   private
