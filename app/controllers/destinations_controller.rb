@@ -29,6 +29,16 @@ class DestinationsController < ApplicationController
     redirect_to destination_path(@destination)
   end
 
+  def destroy
+    @destination = Destination.find_by(id: params[:id])
+    if @destination.destroy
+      flash[:success] = "Food Travel Story is destroyed"
+    else
+      flash[:danger] = "Food Travel Story is not destroyed"
+    end
+    redirect_to root_url
+  end
+
   private
 
   def destination_params

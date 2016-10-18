@@ -11,6 +11,7 @@
     <p>Recommendations: <%=@destination.recommendation%></p><br>
 
     <%= link_to "Update Food Travel Story", edit_destination_path(@destination), class: "btn btn-info btn-sm dest_button" %><br><br>
+    <%= link_to "Delete Destination", [@destination], method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-warning btn-xs dest_button" %><br><br>
 
     <h4>Add a comment:</h4>
       <%= form_for @destination.comments.build do |f| %>
