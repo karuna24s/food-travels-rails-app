@@ -15,21 +15,19 @@
     <%= link_to "Update Food Travel Story", edit_destination_path(@destination), class: "btn btn-info btn-sm dest_button" %><br><br>
     <%= link_to "Delete Destination", [@destination], method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-warning btn-sm dest_button" %><br><br>
 
-    <h4>Add a comment:</h4>
-      <%= form_for @destination.comments.build do |f| %>
-      <% f.hidden_field :destination_id %>
-      <% f.hidden_field :user_id %>
-        <%= f.fields_for :user, @destination.comments.last.build_user do |user_fields| %>
-          <p><strong>Name</strong><%= user_fields.text_field :name, class: 'form-control' %></p>
-        <% end %>
-        <p><strong>Content</strong> <%= f.text_area :content, class: 'form-control' %></p>
-        <%= f.submit "Create Comment", class: "btn btn-sm btn-primary" %>
-      <% end %><br>
-
+    <% if current_user %>
+      <h4>Add a comment:</h4>
+        <%= form_for @comment, url: destination_comments_path(@destination, @comment)  do |f| %>
+          <p><strong>Content</strong> <%= f.text_area :content, class: 'form-control' %></p>
+          <%= f.submit "Create Comment", class: "btn btn-sm btn-primary" %>
+        <% end %><br>
+    <% else %>
+      <p>Please log in order to add a comment.</p>
+    <% end %>
     <h4>Comments:</h4>
       <% @destination.comments.each do |comment| %>
       <div class="well well-white">
-        Posted by: <strong><%= comment.user.name %></strong><br><%= comment.content %>
+        <strong><%= comment.user.name %></strong> says: <%= comment.content %>
       </div>
       <% end %>
   </div>

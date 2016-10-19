@@ -6,6 +6,9 @@ class DestinationsController < ApplicationController
   def show
     @destination = Destination.find(params[:id])
     @food = @destination.food
+    if current_user
+      @comment = current_user.comments.build(destination: @destination)
+    end
   end
 
   def new
