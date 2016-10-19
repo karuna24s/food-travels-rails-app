@@ -26,14 +26,11 @@ class DestinationsController < ApplicationController
   def update
     if !current_user
       redirect_to new_user_session_path, alert: "You must be logged in order to edit a travel story"
-    elsif current_user.username == params[:user_id]
+    else current_user.name == params[:user_id]
       @destination = Destination.find(params[:id])
       @destination.update(destination_params)
       redirect_to destination_path(@destination)
-    else
-      redirect_to new_user_destination_path(current_user), alert: "You can only edit travel stories for yourself"
     end
-
   end
 
   def destroy

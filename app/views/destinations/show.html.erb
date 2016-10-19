@@ -4,6 +4,7 @@
     <h3>Food Travel Story</h3>
 
     <p>Title: <%=@destination.title%></p>
+    <p>Written by: <%= @destination.user.name %></p>
     <p>Location: <%=@destination.location%></p>
     <p>Name: <%=@food.name%></p>
     <p>Type of Food: <%=@food.category%></p>
@@ -16,8 +17,8 @@
 
     <h4>Add a comment:</h4>
       <%= form_for @destination.comments.build do |f| %>
-      <%= f.hidden_field :destination_id %>
-      <%= f.hidden_field :user_id %>
+      <% f.hidden_field :destination_id %>
+      <% f.hidden_field :user_id %>
         <%= f.fields_for :user, @destination.comments.last.build_user do |user_fields| %>
           <p><strong>Name</strong><%= user_fields.text_field :name, class: 'form-control' %></p>
         <% end %>
@@ -25,12 +26,11 @@
         <%= f.submit "Create Comment", class: "btn btn-sm btn-primary" %>
       <% end %><br>
 
-    <p>Comments: <br>
+    <h4>Comments:</h4>
       <% @destination.comments.each do |comment| %>
-        <li><%= comment.user.name %> says: <%= comment.content %></li>
+      <div class="well well-white">
+        Posted by: <strong><%= comment.user.name %></strong><br><%= comment.content %>
+      </div>
       <% end %>
-    </p>
-
   </div>
-
 </div>
