@@ -27,21 +27,26 @@ class DestinationsController < ApplicationController
   end
 
   def update
+    @destination = Destination.find(params[:id])
     if !current_user
-      redirect_to new_user_session_path, alert: "You must be logged in order to edit a travel story"
-    else current_user.name == params[:user_id]
-      @destination = Destination.find(params[:id])
+      redirect_to new_user_session_path, alert: "You must be the author in order to edit a story."
+    elsif current_user != @destination.user
+      redirect_to :back, alert: "You must be the author in order to edit a story."
+    else
       @destination.update(destination_params)
       redirect_to destination_path(@destination)
     end
   end
 
   def destroy
-    if current_user
+    @destination = Destination.find(params[:id])
+    if !current_user
+      redirect_to new_user_session_path, alert: "You must be the author in order to edit a story."
+    elsif current_user != @destination.user
+      redirect_to :back, alert: "You must be the author in order to delete a story."     
+    else
       @destination.destroy
       redirect_to destinations_path
-    else
-      redirect_to new_user_session_path, alert: "You must be logged in order to delete a travel story"
     end
   end
 
