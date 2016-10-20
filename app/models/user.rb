@@ -20,7 +20,8 @@ class User < ApplicationRecord
   end
 
   def self.most_destinations
-    User.joins(:destinations).group(:user_id).order("count(user_id) DESC").first.name
+    # User.joins(:destinations).group(destinations: :user_id).order("count(user_id) DESC").first.name
+    User.select('users.*, COUNT(destinations.id) AS destinations_count').joins(:destinations).group('users.id').order('destinations_count DESC').first
   end
 
 end
