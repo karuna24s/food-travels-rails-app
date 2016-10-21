@@ -13,11 +13,10 @@ class DestinationsController < ApplicationController
 
   def new
     @destination = Destination.new
-    @destination.build_food #belongs_to adds build associations
+    @destination.build_food
   end
 
   def create
-    # raise params.inspect
     @destination = current_user.destinations.create(destination_params)
     redirect_to destination_path(@destination)
   end
@@ -43,7 +42,7 @@ class DestinationsController < ApplicationController
     if !current_user
       redirect_to new_user_session_path, alert: "You must be the author in order to edit a story."
     elsif current_user != @destination.user
-      redirect_to :back, alert: "You must be the author in order to delete a story."     
+      redirect_to :back, alert: "You must be the author in order to delete a story."
     else
       @destination.destroy
       redirect_to destinations_path
