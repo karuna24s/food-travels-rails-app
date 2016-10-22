@@ -40,7 +40,7 @@ class DestinationsController < ApplicationController
   def destroy
     @destination = Destination.find(params[:id])
     if !current_user
-      redirect_to new_user_session_path, alert: "You must be the author in order to edit a story."
+      redirect_to new_user_session_path, alert: "You must be the author in order to delete a story."
     elsif current_user != @destination.user
       redirect_to :back, alert: "You must be the author in order to delete a story."
     else
