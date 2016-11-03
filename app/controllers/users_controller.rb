@@ -4,4 +4,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def my_destinations
+    @my_destinations = @user.destinations
+  end
+
 end
