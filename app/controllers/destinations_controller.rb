@@ -1,9 +1,6 @@
 class DestinationsController < ApplicationController
   def index
     @destinations = Destination.all
-    if current_user
-      @destinations = current_user.destinations
-    end
   end
 
   def show
