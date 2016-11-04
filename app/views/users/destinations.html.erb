@@ -1,0 +1,9 @@
+<div class="container">
+  <div class=" well col-sm-10">
+    <h4>Your Food Travel Stories:</h4>
+    <% @destinations.each do |destination| %>
+      <p><%= link_to destination.title, destination_path(destination) %>
+      <div id="content-<%= destination.id %>"><%= destination.content %></div><br>
+    <% end %>
+  </div>
+</div>
