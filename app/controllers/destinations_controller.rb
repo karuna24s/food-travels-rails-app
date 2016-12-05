@@ -1,6 +1,7 @@
 class DestinationsController < ApplicationController
   def index
     @destinations = Destination.all
+    render json: @destinations
   end
 
   def show
@@ -8,6 +9,10 @@ class DestinationsController < ApplicationController
     @food = @destination.food
     if current_user
       @comment = current_user.comments.build(destination: @destination)
+      respond_to do |format|
+        format.html { render :show }
+        format.json { render json: @destination}
+      end
     end
   end
 
