@@ -1,7 +1,10 @@
 class DestinationsController < ApplicationController
   def index
     @destinations = Destination.all
-    render json: @destinations
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @attractions }
+    end
   end
 
   def show

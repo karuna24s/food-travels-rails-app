@@ -6,6 +6,7 @@ class CommentsController < ApplicationController
     @comment.destination = @destination
     @comment.save
     redirect_to destination_path(@destination)
+    # render json: @comment, status: 201
   end
 
 

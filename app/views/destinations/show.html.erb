@@ -26,12 +26,12 @@
     <% end %>
     <h4>Comments:</h4>
       <% @destination.comments.each do |comment| %>
-      <div class="well well-white">
+      <div class="well well-white" id="comment-<%= comment.id %>">
         <strong><%= comment.user.name %></strong> says: <%= comment.content %>
       </div>
       <% end %>
 
-    <a href="#" class="js-next btn btn-primary btn-sm" data-id="<%=@destination.id%>">View Next Food Travel Story</a><br><br>  
+    <a href="#" class="js-next btn btn-primary btn-sm" data-id="<%=@destination.id%>">View Next Food Travel Story</a><br><br>
   </div>
 
 </div>
