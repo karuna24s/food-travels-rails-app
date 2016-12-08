@@ -25,11 +25,14 @@
       <p>Please log in order to add a comment.</p>
     <% end %>
     <h4>Comments:</h4>
+    <div id="submitted-comments">
       <% @destination.comments.each do |comment| %>
       <div class="well well-white" id="comment-<%= comment.id %>">
         <strong><%= comment.user.name %></strong> says: <%= comment.content %>
       </div>
       <% end %>
+    </div>
+
 
     <a href="#" class="js-next btn btn-primary btn-sm" data-id="<%=@destination.id%>">View Next Food Travel Story</a><br><br>
   </div>

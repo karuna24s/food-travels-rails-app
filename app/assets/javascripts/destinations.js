@@ -1,3 +1,4 @@
+console.log('hello')
 function Destination(data) {
   this.id = data.id;
   this.title = data.title;
@@ -9,7 +10,8 @@ function Destination(data) {
 
 $(function () {
   $(".js-more").on('click', function(e) {
-    // e.preventDefault();
+    console.log('hello')
+    e.preventDefault();
     var id = $(this).data("id");
     $.get("/destinations/" + id + "/destinations", function(data) {
 
