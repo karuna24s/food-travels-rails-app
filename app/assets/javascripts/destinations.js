@@ -8,9 +8,10 @@ function Destination(data) {
 }
 
 $(function () {
-  $(".js-more").on('click', function() {
+  $(".js-more").on('click', function(e) {
+    // e.preventDefault();
     var id = $(this).data("id");
-    $.get("/destinations/" + id + "destination", function(data) {
+    $.get("/destinations/" + id + "/destinations", function(data) {
 
       $("#content-" + id).text(data["content"]);
     });
