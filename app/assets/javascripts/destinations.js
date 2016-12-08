@@ -18,6 +18,8 @@ $(function () {
   });
 });
 
+
+
 function Comment(data) {
   this.id = data.id;
   this.content = data.content;
@@ -29,3 +31,24 @@ Comment.prototype.renderDisplay = function() {
   html += "" + this.user.name + ": <br>" + this.content + "<br>";
   $("").append(html);
 }
+
+$(function() {
+  $("form#new_comment").on("submit", function(event) {
+    event.preventDefault();
+    var $form = $(this);
+    var action = $form.attr("action");
+    var params = $form.serialize();
+    $.ajax({
+      url: action,
+      data: params,
+      dataType: "json",
+      method: "POST"
+    })
+    .success(function(json) {
+      $('#new_comment').hide();
+      var comment = new Comment(json);
+      comment.renderDisplay();
+
+    })
+  })
+})
