@@ -2,7 +2,8 @@
   <div class=" well col-sm-12">
     <% @destinations.each do |destination| %>
       <p><%= link_to destination.title, destination_path(destination) %>
-      <div id="content-<%= destination.id %>"><%= destination.content %></div><br>
+      <div id="content-<%= destination.id %>"><%= truncate destination.content %></div></br>
+      <button class="js-more" id ="<%= destination.id %>" data-id = "<%= destination.id %>">Read More</button>
     <% end %>
   </div>
 </div>

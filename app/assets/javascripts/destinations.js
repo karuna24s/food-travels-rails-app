@@ -10,7 +10,7 @@ function Destination(data) {
 $(function () {
   $(".js-more").on('click', function() {
     var id = $(this).data("id");
-    $.get("/destinations/" + id + "/destination_data", function(data) {
+    $.get("/destinations/" + id + "destination", function(data) {
 
       $("#content-" + id).text(data["content"]);
     });
