@@ -5,8 +5,8 @@ class CommentsController < ApplicationController
     @comment = current_user.comments.create(comment_params)
     @comment.destination = @destination
     @comment.save
-    redirect_to destination_path(@destination)
-    # render json: @comment, status: 201
+    # redirect_to destination_path(@destination)
+    render json: @comment, status: 201
   end
 
 
