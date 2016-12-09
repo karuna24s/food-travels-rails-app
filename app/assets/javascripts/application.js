@@ -51,8 +51,8 @@ function Comment(data) {
 
 
 Comment.prototype.renderDisplay = function() {
-  var html = "<div class='well well-white'>";
-  html += "<strong>" + this.user.name + "</strong>" + " says: " + this.content + "</div>";
+  var html = "" ;
+  html += "<div class=\'well well-white\' id=\'comment-\' + comment.id + '\'>" +  "<strong>" + this.user.name + "</strong>" + " says: " + this.content + "</div>";
   // html += "" + this.user.name + ": <br>" + this.content + "<br>";
   // <div class="well well-white" id="comment-57">
   //   <strong>Dom</strong> says: Thank you for writing this post. I am happy to know that there are vegetarian options available in Sicily aside from having pizza .
@@ -73,8 +73,10 @@ $(function() {
       method: "POST"
     })
     .success(function(json) {
-      // $('#new_comment').hide();
+    $('#new_comment').hide();
       console.log(json)
+      // $('input[type="submit"]').prop("disabled", false);
+      // $.rails.enableElement($('a[data-disable-with]'));
       var comment = new Comment(json);
       comment.renderDisplay();
 
