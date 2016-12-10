@@ -3,13 +3,13 @@
     <%= render 'shared/error_messages' %>
     <h3>Food Travel Story</h3>
 
-    <p class="destinationTitle">Title: <%=@destination.title%></p>
-    <p>Written by: <%= @destination.user.name %></p>
-    <p class="destinationLocation">Location: <%=@destination.location%></p>
-    <p>Name: <%=@food.name%></p>
-    <p>Type of Food: <%=@food.category%></p>
+    <p>Title: <span class="destinationTitle"><%=@destination.title%></span></p>
+    <p>Written by: <span class="destinationUserName"><%= @destination.user.name %></span></p>
+    <p>Location: <span class="destinationLocation"><%=@destination.location%></span></p>
+    <p>Name: <span class="destinationFoodName"><%=@food.name%></span></p>
+    <p>Type of Food: <span class="destinationFoodCategory"><%=@food.category%></span></p>
 
-    <p class="destinationContent">Content: <%=@destination.content%></p>
+    <p>Content: <span class="destinationContent"><%=@destination.content%></span></p>
     <p>Recommendations: <span class="destinationRecommendation"><%=@destination.recommendation%></span></p><br>
 
     <%= link_to "Update Food Travel Story", edit_destination_path(@destination), class: "btn btn-info btn-sm dest_button" %><br><br>
@@ -28,7 +28,7 @@
     <div id="submitted-comments">
       <% @destination.comments.each do |comment| %>
       <div class="well well-white" id="comment-<%= comment.id %>">
-        <strong><%= comment.user.name %></strong> says: <%= comment.content %>
+        <strong class="commentUserName"><%= comment.user.name %></strong> says: <span class="commentContent"><%= comment.content %></span>
       </div>
       <% end %>
     </div>
