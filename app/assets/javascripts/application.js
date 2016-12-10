@@ -37,7 +37,6 @@ $(function () {
 
   function loadDestination(id) {
     $.get("/destinations/" + id + ".json", function(data) {
-      console.log(data);
       $(".destinationTitle").text(data["title"]);
       $(".destinationUserName").text(data["user"]["name"]);
       $(".destinationLocation").text(data["location"]);
@@ -47,6 +46,12 @@ $(function () {
       $(".destinationRecommendation").text(data["recommendation"]);
       $(".js-next").attr("data-id", data["id"]);
       $(".js-previous").attr("data-id",data["id"]);
+      $("#submitted-comments").empty();
+      data["comment_list"].forEach(function(element){
+        var comment = new Comment(element);
+        comment.renderDisplay();
+      });
+
     });
   }
 
