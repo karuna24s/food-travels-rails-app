@@ -17,13 +17,20 @@
 //= require_tree .
 
 $(function () {
+  var destinationArray = [];
+  var id = parseInt($(".js-next").attr("data-id"));
+  var currentIndex = 0;
+
+  $.get("/destinations/indexes.json", function(data) {
+    destinationArray = data;
+    currentIndex = destinationArray.indexOf(id);
+    console.log(currentIndex);
+  });
+
   $(".js-more").on('click', function(e) {
-    console.log('hello')
     e.preventDefault();
-    // debugger;
     var id = $(this).data("id");
     $.get("/destinations/" + id + ".json", function(data) {
-      console.log(data)
      $("#content-" + id).text(data["content"]);
     });
   });
@@ -40,48 +47,25 @@ $(function () {
   }
 
   $(".js-next").on("click", function(event) {
-    var destinationArray = [];
+    currentIndex += 1;
+    event.preventDefault();
+    loadDestination(destinationArray[currentIndex]);
 
-    $.get("/destinations/indexes.json", function(data) {
-      var id = parseInt($(".js-next").attr("data-id"));
-      destinationArray = data;
-
-      var currentIndex = destinationArray.indexOf(id);
-      var nextId = destinationArray[currentIndex + 1];
-      console.log(currentIndex);
-      if (currentIndex === destinationArray.length - 2) {
-        console.log("Disabled Button");
-        $(".js-next").attr("disabled", true);
-      }
-
-      event.preventDefault();
-      loadDestination(nextId);
-
-    });
-
-
+    if (currentIndex == destinationArray.length - 1) {
+      $(".js-next").attr("disabled", true);
+    }
+    $(".js-previous").attr("disabled", false);
   });
 
   $(".js-previous").on("click", function(event) {
-    var destinationArray = [];
+    currentIndex -= 1;
+    event.preventDefault();
+    loadDestination(destinationArray[currentIndex]);
 
-    $.get("/destinations/indexes.json", function(data) {
-      var id = parseInt($(".js-previous").attr("data-id"));
-      destinationArray = data;
-
-      var currentIndex = destinationArray.indexOf(id);
-      var nextId = destinationArray[currentIndex - 1];
-      console.log(currentIndex);
-      if (currentIndex === 1) {
-        console.log("Disabled Button");
-        $(".js-previous").attr("disabled", true);
-      }
-
-      event.preventDefault();
-      loadDestination(nextId);
-    });
-
-
+    if (currentIndex === 0) {
+      $(".js-previous").attr("disabled", true);
+    }
+    $(".js-next").attr("disabled", false);
   });
 
 
