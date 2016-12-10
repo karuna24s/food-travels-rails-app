@@ -16,17 +16,6 @@
 
 //= require_tree .
 
-
-
-function Destination(data) {
-  this.id = data.id;
-  this.title = data.title;
-  this.location = data.location;
-  this.content = data.content;
-  this.recommendation = data.recommendation;
-  this.user = data.user;
-}
-
 $(function () {
   $(".js-more").on('click', function(e) {
     console.log('hello')
@@ -38,7 +27,72 @@ $(function () {
      $("#content-" + id).text(data["content"]);
     });
   });
+
+  $(".js-next").on("click", function(event) {
+    var destinationArray = [];
+
+    $.get("/destinations/indexes.json", function(data) {
+      var id = parseInt($(".js-next").attr("data-id"));
+      destinationArray = data;
+
+      var currentIndex = destinationArray.indexOf(id);
+      var nextId = destinationArray[currentIndex + 1];
+      console.log(currentIndex);
+      if (currentIndex === destinationArray.length - 2) {
+        console.log("Disabled Button");
+        $(".js-next").attr("disabled", true);
+      }
+
+      event.preventDefault();
+
+      $.get("/destinations/" + nextId + ".json", function(data) {
+        $(".destinationTitle").text(data["title"]);
+        $(".destinationLocation").text(data["location"]);
+        $(".destinationContent").text(data["content"]);
+        $(".destinationRecommendation").text(data["recommendation"]);
+        $(".js-next").attr("data-id", data["id"]);
+        $(".js-previous").attr("data-id",data["id"]);
+      });
+    });
+
+
+  });
+
+  $(".js-previous").on("click", function(event) {
+    var destinationArray = [];
+
+    $.get("/destinations/indexes.json", function(data) {
+      var id = parseInt($(".js-previous").attr("data-id"));
+      destinationArray = data;
+
+      var currentIndex = destinationArray.indexOf(id);
+      var nextId = destinationArray[currentIndex - 1];
+      console.log(currentIndex);
+      if (currentIndex === 1) {
+        console.log("Disabled Button");
+        $(".js-previous").attr("disabled", true);
+      }
+
+      event.preventDefault();
+
+      $.get("/destinations/" + nextId + ".json", function(data) {
+        $(".destinationTitle").text(data["title"]);
+        $(".destinationLocation").text(data["location"]);
+        $(".destinationContent").text(data["content"]);
+        $(".destinationRecommendation").text(data["recommendation"]);
+        $(".js-next").attr("data-id", data["id"]);
+        $(".js-previous").attr("data-id",data["id"]);
+      });
+    });
+
+
+  });
+
+
 });
+
+
+
 
 
 
@@ -74,7 +128,7 @@ $(function() {
     })
     .success(function(json) {
     $('#new_comment').hide();
-      console.log(json)
+      // console.log(json)
       // $('input[type="submit"]').prop("disabled", false);
       // $.rails.enableElement($('a[data-disable-with]'));
       var comment = new Comment(json);

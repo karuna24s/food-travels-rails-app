@@ -57,6 +57,13 @@ class DestinationsController < ApplicationController
     end
   end
 
+  def destination_indexes
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: Destination.all.map{|dest| dest.id}}
+    end
+  end
+
   private
 
   def destination_params

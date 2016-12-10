@@ -3,14 +3,14 @@
     <%= render 'shared/error_messages' %>
     <h3>Food Travel Story</h3>
 
-    <p>Title: <%=@destination.title%></p>
+    <p class="destinationTitle">Title: <%=@destination.title%></p>
     <p>Written by: <%= @destination.user.name %></p>
-    <p>Location: <%=@destination.location%></p>
+    <p class="destinationLocation">Location: <%=@destination.location%></p>
     <p>Name: <%=@food.name%></p>
     <p>Type of Food: <%=@food.category%></p>
 
-    <p>Content: <%=@destination.content%></p>
-    <p>Recommendations: <%=@destination.recommendation%></p><br>
+    <p class="destinationContent">Content: <%=@destination.content%></p>
+    <p>Recommendations: <span class="destinationRecommendation"><%=@destination.recommendation%></span></p><br>
 
     <%= link_to "Update Food Travel Story", edit_destination_path(@destination), class: "btn btn-info btn-sm dest_button" %><br><br>
     <%= link_to "Delete Food Travel Story", [@destination], method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-warning btn-sm dest_button" %><br><br>
@@ -33,7 +33,7 @@
       <% end %>
     </div>
 
-
+    <a href="#" class="js-previous btn btn-primary btn-sm" data-id="<%=@destination.id%>">View Previous Food Travel Story</a><br><br>
     <a href="#" class="js-next btn btn-primary btn-sm" data-id="<%=@destination.id%>">View Next Food Travel Story</a><br><br>
   </div>
 
