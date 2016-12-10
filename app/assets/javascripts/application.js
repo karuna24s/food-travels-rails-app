@@ -28,6 +28,17 @@ $(function () {
     });
   });
 
+  function loadDestination(id) {
+    $.get("/destinations/" + id + ".json", function(data) {
+      $(".destinationTitle").text(data["title"]);
+      $(".destinationLocation").text(data["location"]);
+      $(".destinationContent").text(data["content"]);
+      $(".destinationRecommendation").text(data["recommendation"]);
+      $(".js-next").attr("data-id", data["id"]);
+      $(".js-previous").attr("data-id",data["id"]);
+    });
+  }
+
   $(".js-next").on("click", function(event) {
     var destinationArray = [];
 
@@ -44,15 +55,8 @@ $(function () {
       }
 
       event.preventDefault();
+      loadDestination(nextId);
 
-      $.get("/destinations/" + nextId + ".json", function(data) {
-        $(".destinationTitle").text(data["title"]);
-        $(".destinationLocation").text(data["location"]);
-        $(".destinationContent").text(data["content"]);
-        $(".destinationRecommendation").text(data["recommendation"]);
-        $(".js-next").attr("data-id", data["id"]);
-        $(".js-previous").attr("data-id",data["id"]);
-      });
     });
 
 
@@ -74,15 +78,7 @@ $(function () {
       }
 
       event.preventDefault();
-
-      $.get("/destinations/" + nextId + ".json", function(data) {
-        $(".destinationTitle").text(data["title"]);
-        $(".destinationLocation").text(data["location"]);
-        $(".destinationContent").text(data["content"]);
-        $(".destinationRecommendation").text(data["recommendation"]);
-        $(".js-next").attr("data-id", data["id"]);
-        $(".js-previous").attr("data-id",data["id"]);
-      });
+      loadDestination(nextId);
     });
 
 
