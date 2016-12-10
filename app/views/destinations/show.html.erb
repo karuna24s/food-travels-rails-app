@@ -18,8 +18,9 @@
     <% if current_user %>
       <h4>Add a comment:</h4>
         <%= form_for @comment, url: destination_comments_path(@destination, @comment)  do |f| %>
-          <p><strong>Content</strong> <%= f.text_area :content, class: 'form-control' %></p>
-          <%= f.submit "Create Comment", class: "btn btn-sm btn-primary" %>
+          <p><strong>Content</strong> <%= f.text_area :content, class: 'commentBox form-control' %></p>
+          <!-- <%= f.submit "Create Comment", class: "btn btn-sm btn-primary" %> -->
+          <button type="submit" class="btn btn-sm btn-primary">Create Comment</button>
         <% end %><br>
     <% else %>
       <p>Please log in order to add a comment.</p>
