@@ -37,6 +37,8 @@ $(function () {
 
   function loadDestination(id) {
     $.get("/destinations/" + id + ".json", function(data) {
+      var destinationCommentPath = '/destinations/' + id + '/comments/';
+      $("#new_comment").attr('action', destinationCommentPath);
       $(".destinationTitle").text(data["title"]);
       $(".destinationUserName").text(data["user"]["name"]);
       $(".destinationLocation").text(data["location"]);
