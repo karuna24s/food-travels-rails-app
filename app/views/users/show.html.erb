@@ -9,7 +9,9 @@
     <h4>Your Food Travel Stories:</h4>
     <% @user.destinations.each do |destination| %>
       <p><%= link_to destination.title, destination_path(destination) %>
-      <div id="content-<%= destination.id %>"><%= destination.content %></div><br>
+      <div id="content-<%= destination.id %>"><%= destination.content.truncate(200) %>
+        <a href='#' data-id ="<%= destination.id %>" class='js-more'>Read More</a>
+      </div><br>
     <% end %>
   </div>
 </div>
