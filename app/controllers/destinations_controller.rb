@@ -3,7 +3,7 @@ class DestinationsController < ApplicationController
     @destinations = Destination.all
     respond_to do |format|
       format.html { render :index }
-      format.json { render json: @attractions }
+      format.json { render json: @destinations }
     end
   end
 
