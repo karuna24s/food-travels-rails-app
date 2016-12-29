@@ -87,7 +87,7 @@ $(function () {
 
   function loadDestination(data) {
       history.pushState({}, "", "/destinations/" + data.id)
-      var destinationCommentPath = '/destinations/' + id + '/comments/';
+      var destinationCommentPath = '/destinations/' + data.id + '/comments/';
       $("#new_comment").attr('action', destinationCommentPath);
       $(".destinationTitle").text(data["title"]);
       $(".destinationUserName").text(data["user"]["name"]);
