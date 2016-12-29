@@ -1,10 +1,4 @@
 <div class="container">
-  <div class=" well col-sm-12">
-    <% @destinations.each do |destination| %>
-      <p><%= link_to destination.title, destination_path(destination) %>
-      <div id="content-<%= destination.id %>"><%= destination.content.truncate(200) %>
-        <a href='#' data-id ="<%= destination.id %>" class='js-more'>Read More</a>
-      </div><br>
-    <% end %>
+  <div id="destinationsInfo" class="well col-sm-12">
   </div>
 </div>

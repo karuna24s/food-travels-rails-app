@@ -12,11 +12,23 @@ class DestinationsController < ApplicationController
     @food = @destination.food
     if current_user
       @comment = current_user.comments.build(destination: @destination)
-      respond_to do |format|
-        format.html { render :show }
-        format.json { render json: @destination}
-      end
     end
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json:  @destination }
+    end
+  end
+
+  def next_destination
+    @destination = Destination.find(params[:id])
+    @next_destination = @destination.next
+    render json: @next_destination
+  end
+
+  def previous_destination
+    @destination = Destination.find(params[:id])
+    @previous_destination = @destination.previous
+    render json: @previous_destination
   end
 
   def new
@@ -57,12 +69,12 @@ class DestinationsController < ApplicationController
     end
   end
 
-  def destination_indexes
-    respond_to do |format|
-      format.html { render :show }
-      format.json { render json: Destination.all.map{|dest| dest.id}}
-    end
-  end
+  # def destination_indexes
+  #   respond_to do |format|
+  #     format.html { render :show }
+  #     format.json { render json: Destination.all.map{|dest| dest.id}}
+  #   end
+  # end
 
   private
 

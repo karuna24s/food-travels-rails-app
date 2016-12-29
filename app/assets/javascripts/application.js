@@ -17,26 +17,76 @@
 //= require_tree .
 
 $(function () {
-  var destinationArray = [];
+  // var destinationArray = [];
   var id = parseInt($(".js-next").attr("data-id"));
-  var currentIndex = 0;
+  // var nextId;
+  // var currentIndex = 0;
 
-  $.get("/destinations/indexes.json", function(data) {
-    destinationArray = data;
-    currentIndex = destinationArray.indexOf(id);
-    console.log(currentIndex);
-  });
+  //  $.get("/destinations.json", function(data) {
+  //    destinationArray = data;
+  //    currentIndex = destinationArray.indexOf(id);
+  //    console.log(currentIndex);
+  //  });
 
-  $(".js-more").on('click', function(e) {
+  if ($("#destinationsInfo").length) {
+    loadAllDestinations();
+  }
+
+  function loadAllDestinations() {
+    $.ajax({
+      url: "/destinations.json",
+      method: 'GET'
+    })
+    .then(function(data) {
+      destinationArray = data;
+      $.each(
+        destinationArray, function(index, destination) {
+          var destinationData = "<p><a href='/destinations/" + destination.id + "'>"
+           + destination.title + "</a><div id='content-" + destination.id + "'>"
+           + destination.content.substring(0, 250) + "..."
+           + "<a href='#' data-id='" + destination.id + "' class='js-more'>Read More</a></div><br>";
+          $('#destinationsInfo').append(destinationData);
+        }
+      )
+    });
+  }
+
+// For the destinations index page
+
+  $("#destinationsInfo").on('click', '.js-more', function(e) {
     e.preventDefault();
-    var id = $(this).data("id");
+    var id = this.dataset.id;
     $.get("/destinations/" + id + ".json", function(data) {
-     $("#content-" + id).text(data["content"]);
+      $("#content-" + id).html(data.content)
     });
   });
 
-  function loadDestination(id) {
+// For the Users Destinations Page
+
+  $("#userDestinationsInfo").on('click', '.js-more', function(e) {
+    e.preventDefault();
+    var id = this.dataset.id;
     $.get("/destinations/" + id + ".json", function(data) {
+     $("#content-" + id).html(data.content);
+
+    });
+  });
+
+// For the Users Show Page
+
+  $("#userDestinationsShowInfo").on('click', '.js-more', function(e) {
+    e.preventDefault();
+    var id = this.dataset.id;
+    $.get("/destinations/" + id + ".json", function(data) {
+     $("#content-" + id).html(data.content);
+
+    });
+  });
+
+// For the Destinations Show page
+
+  function loadDestination(data) {
+      history.pushState({}, "", "/destinations/" + data.id)
       var destinationCommentPath = '/destinations/' + id + '/comments/';
       $("#new_comment").attr('action', destinationCommentPath);
       $(".destinationTitle").text(data["title"]);
@@ -54,29 +104,41 @@ $(function () {
         comment.renderDisplay();
       });
 
-    });
+
   }
 
   $(".js-next").on("click", function(event) {
-    currentIndex += 1;
+    // currentIndex += 1;
+    // var last = //get request to last and first url
+    // if last ==
+    var id = $(".js-next").attr("data-id")
+    $.get("/destinations/" + id + "/next", function(data) {
+      console.log(data)
+      loadDestination(data);
+    });
     event.preventDefault();
-    loadDestination(destinationArray[currentIndex]);
 
-    if (currentIndex == destinationArray.length - 1) {
-      $(".js-next").attr("disabled", true);
-    }
-    $(".js-previous").attr("disabled", false);
+    // if (currentIndex == destinationArray.length - 1) {
+    //   $(".js-next").attr("disabled", true);
+    // }
+    // $(".js-previous").attr("disabled", false);
   });
 
   $(".js-previous").on("click", function(event) {
-    currentIndex -= 1;
+    var id = $(".js-previous").attr("data-id")
+    $.get("/destinations/" + id + "/previous", function(data) {
+      console.log(data)
+      loadDestination(data);
+    });
     event.preventDefault();
-    loadDestination(destinationArray[currentIndex]);
+    // currentIndex -= 1;
+    // event.preventDefault();
+    // loadDestination(destinationArray[currentIndex]);
 
-    if (currentIndex === 0) {
-      $(".js-previous").attr("disabled", true);
-    }
-    $(".js-next").attr("disabled", false);
+    // if (currentIndex === 0) {
+    //   $(".js-previous").attr("disabled", true);
+    // }
+    // $(".js-next").attr("disabled", false);
   });
 
 });
