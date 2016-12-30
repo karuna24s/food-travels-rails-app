@@ -17,16 +17,7 @@
 //= require_tree .
 
 $(function () {
-  // var destinationArray = [];
   var id = parseInt($(".js-next").attr("data-id"));
-  // var nextId;
-  // var currentIndex = 0;
-
-  //  $.get("/destinations.json", function(data) {
-  //    destinationArray = data;
-  //    currentIndex = destinationArray.indexOf(id);
-  //    console.log(currentIndex);
-  //  });
 
   if ($("#destinationsInfo").length) {
     loadAllDestinations();
@@ -37,18 +28,35 @@ $(function () {
       url: "/destinations.json",
       method: 'GET'
     })
-    .then(function(data) {
-      destinationArray = data;
-      $.each(
-        destinationArray, function(index, destination) {
-          var destinationData = "<p><a href='/destinations/" + destination.id + "'>"
-           + destination.title + "</a><div id='content-" + destination.id + "'>"
-           + destination.content.substring(0, 250) + "..."
-           + "<a href='#' data-id='" + destination.id + "' class='js-more'>Read More</a></div><br>";
-          $('#destinationsInfo').append(destinationData);
-        }
-      )
+    // promise
+    .then(function(destinations) {
+      for (var i = 0; i < destinations.length; i++) {
+        var destination = new Destination(destinations[i])
+        destination.appendToDOM($('#destinationsInfo'))
+      }
     });
+
+  }
+
+  function Destination(attributes) {
+    this.id = attributes.id
+    this.title = attributes.title
+    this.content = attributes.content
+  }
+
+  Destination.prototype.appendToDOM = function(element) {
+    var htmlString = `
+      <p>
+        <a href="/destinations/${this.id}">
+          ${this.title}
+        </a>
+        <div id="content-${this.id}">
+          ${this.content.substring(0, 250)}...
+          <a href='#' data-id="${this.id}" class='js-more'>Read More</a>
+        </div><br>
+      </p>
+    `;
+    element.append(htmlString);
   }
 
 // For the destinations index page
@@ -108,20 +116,12 @@ $(function () {
   }
 
   $(".js-next").on("click", function(event) {
-    // currentIndex += 1;
-    // var last = //get request to last and first url
-    // if last ==
     var id = $(".js-next").attr("data-id")
     $.get("/destinations/" + id + "/next", function(data) {
       console.log(data)
       loadDestination(data);
     });
     event.preventDefault();
-
-    // if (currentIndex == destinationArray.length - 1) {
-    //   $(".js-next").attr("disabled", true);
-    // }
-    // $(".js-previous").attr("disabled", false);
   });
 
   $(".js-previous").on("click", function(event) {
@@ -131,19 +131,10 @@ $(function () {
       loadDestination(data);
     });
     event.preventDefault();
-    // currentIndex -= 1;
-    // event.preventDefault();
-    // loadDestination(destinationArray[currentIndex]);
-
-    // if (currentIndex === 0) {
-    //   $(".js-previous").attr("disabled", true);
-    // }
-    // $(".js-next").attr("disabled", false);
+    
   });
 
 });
-
-
 
 
 
@@ -166,6 +157,7 @@ $(function() {
     event.preventDefault();
     var $form = $(this);
     var action = $form.attr("action");
+    // in order to process the comment(form data), its need to be converted from an object to a string.
     var params = $form.serialize();
     $.ajax({
       url: action,

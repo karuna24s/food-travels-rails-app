@@ -10,19 +10,8 @@ class Destination < ApplicationRecord
     end
   end
 
-  # def next(id)
-  #   next_dest = nil
-  #   # binding.pry
-  #   Destination.all.each.with_index do |destination, index|
-  #     # binding.pry
-  #     if id == destination.id
-  #       next_dest = Destination.all[index + 1]
-  #       return next_dest
-  #     end
-  #   end
-  #   return nil
-  # end
   def next
+    # if the first destination is greater the current one exists then return the next destination
     if next_dest = self.class.where("id > ?", id).first
       next_dest
     else
@@ -31,26 +20,12 @@ class Destination < ApplicationRecord
   end
 
   def previous
+    # if the destination is less then current one exists then return the previous destination
     if previous_dest = self.class.where("id < ?", id).last
       previous_dest
     else
       Destination.last
     end
   end
-
-
-
-  # def previous(id)
-  #   previous_dest = nil
-  #   # binding.pry
-  #   Destination.all.each.with_index do |destination, index|
-  #     # binding.pry
-  #     if id == destination.id
-  #       previous_dest = Destination.all[index - 1]
-  #       return previous_dest
-  #     end
-  #   end
-  #   return nil
-  # end
 
 end
