@@ -17,6 +17,7 @@
 //= require_tree .
 
 $(function () {
+  var destinationArray = [];
   var id = parseInt($(".js-next").attr("data-id"));
 
   if ($("#destinationsInfo").length) {
@@ -29,35 +30,20 @@ $(function () {
       method: 'GET'
     })
     // promise
-    .then(function(destinations) {
-      for (var i = 0; i < destinations.length; i++) {
-        var destination = new Destination(destinations[i])
-        destination.appendToDOM($('#destinationsInfo'))
-      }
-    });
-
+    .then(function(data) {
+       destinationArray = data;
+       $.each(
+         destinationArray, function(index, destination) {
+           var destinationData = "<p><a href='/destinations/" + destination.id + "'>"
+            + destination.title + "</a><div id='content-" + destination.id + "'>"
+            + destination.content.substring(0, 250) + "..."
+            + "<a href='#' data-id='" + destination.id + "' class='js-more'>Read More</a></div><br>";
+           $('#destinationsInfo').append(destinationData);
+         }
+       )
+     });
   }
 
-  function Destination(attributes) {
-    this.id = attributes.id
-    this.title = attributes.title
-    this.content = attributes.content
-  }
-
-  Destination.prototype.appendToDOM = function(element) {
-    var htmlString = `
-      <p>
-        <a href="/destinations/${this.id}">
-          ${this.title}
-        </a>
-        <div id="content-${this.id}">
-          ${this.content.substring(0, 250)}...
-          <a href='#' data-id="${this.id}" class='js-more'>Read More</a>
-        </div><br>
-      </p>
-    `;
-    element.append(htmlString);
-  }
 
 // For the destinations index page
 
@@ -131,7 +117,7 @@ $(function () {
       loadDestination(data);
     });
     event.preventDefault();
-    
+
   });
 
 });
