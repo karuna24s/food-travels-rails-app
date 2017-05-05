@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'active_model_serializers', '~> 0.10.0'
-# Ruby version must 2.3.1 not 2.4.1
+# Ruby version must lower than 2.4.0 (2.3.1 works on my end)
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 # Use Puma as the app server
