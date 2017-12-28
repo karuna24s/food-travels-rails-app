@@ -2,10 +2,13 @@ class CommentsController < ApplicationController
   before_action :set_destination
 
   def create
-    @comment = current_user.comments.create(comment_params)
+    @comment = current_user.comments.new(comment_params)
     @comment.destination = @destination
-    @comment.save
-    render json: @comment, status: 201
+    if @comment.save
+      render json: @comment, status: 201
+    else
+      render json: {errors: @comment.errors.full_messages}, status: 400
+    end
   end
 
 
