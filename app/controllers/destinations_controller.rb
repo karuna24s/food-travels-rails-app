@@ -32,13 +32,18 @@ class DestinationsController < ApplicationController
   end
 
   def new
-    @destination = Destination.new
+    @destination ||= Destination.new
     @destination.build_food
   end
 
   def create
-    @destination = current_user.destinations.create(destination_params)
-    redirect_to destination_path(@destination)
+    @destination = current_user.destinations.new(destination_params)
+
+    if @destination.save
+      redirect_to destination_path(@destination)
+    else
+      redirect_to new_destination_path, alert: "You must add a title, content and location in order to create a story."
+    end
   end
 
   def edit
