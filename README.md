@@ -39,7 +39,7 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/karuna
 
 ## License
 
-MIT License | Copyright (c) 2016 [Karuna Sehgal](http://karunasehgal.com)
+MIT License | Copyright (c) 2020 [Karuna Sehgal](https://www.karunasehgal.com)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
