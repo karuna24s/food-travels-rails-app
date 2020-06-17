@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.7.0'
+ruby '2.7.1'
 
 gem 'active_model_serializers', '~> 0.10.0'
 # Ruby version must lower than 2.4.0 (2.3.1 works on my end)
