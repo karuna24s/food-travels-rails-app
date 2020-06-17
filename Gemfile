@@ -4,7 +4,7 @@ ruby '2.7.0'
 gem 'active_model_serializers', '~> 0.10.0'
 # Ruby version must lower than 2.4.0 (2.3.1 works on my end)
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2'
+gem 'rails', '~> 6.0.3.1'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
@@ -34,7 +34,7 @@ gem 'omniauth-facebook'
 gem 'figaro'
 group :development, :test do
   # Use sqlite3 as the database for Active Record
-  gem 'sqlite3', '1.3.13'
+  gem 'sqlite3', '~> 1.4', '>= 1.4.2'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
   gem 'pry-rails'
