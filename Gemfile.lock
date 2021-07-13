@@ -329,7 +329,7 @@ DEPENDENCIES
   launchy
   listen (~> 3.0.5)
   omniauth-facebook
-  pg (= 0.18.4)
+  pg (~> 0.18.4)
   pry-rails
   puma (~> 4.3.8)
   rails (~> 6.1.4)
